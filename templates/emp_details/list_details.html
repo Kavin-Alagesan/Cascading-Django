@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <table border="5px solid #000;" class="table table-striped">
+    <tbody>
+      <thead>
+        <tr>
+          <th style="text-align:center">Branch</th>
+          <th style="text-align:center">Employee Name</th>
+          <th style="text-align:center">Fullname</th>
+          <th style="text-align:center">Gender</th>
+          <th style="text-align:center">Blood Group</th>
+          <th style="text-align:center">DOB</th>
+          <th style="text-align:center">Designation</th>
+          <th style="text-align:center">Contact Number</th>
+          <th style="text-align:center">Photo</th>
+        </tr>
+      </thead>
+    </tbody>
+    <tbody>
+
+      {% for i in response %}
+      <tr>
+        <td style="text-align:center">{{i.emp_name.branch.branch}}</td>
+        <td style="text-align:center">{{i.emp_name.emp_name}}</td>
+        <td style="text-align:center">{{i.emp_fullname}}</td>
+        <td style="text-align:center">{{i.gender}}</td>
+        <td style="text-align:center">{{i.blood_group}}</td>
+        <td style="text-align:center">{{i.dob}}</td>
+        <td style="text-align:center">{{i.designation}}</td>
+        <td style="text-align:center">{{i.contact_number}}</td>
+        <td style="text-align:center"><img src="{{i.photo}}" alt="image" width="50px" height="40px"></td>
+        <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalUpdate"
+            onclick="edit('{{i.id}}');">Edit</button>
+        </td>
+        <td>
+          <a type="button" href="{% url 'delete' i.id %}" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% include 'modal_files/edit.html' %}
+
+
+{% endblock %}
+

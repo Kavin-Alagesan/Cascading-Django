@@ -1,0 +1,127 @@
+<!-- Button trigger modal to edit -->
+<div class="modal fade" id="ModalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" id="bind7" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Employee Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Branches</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" name="selectBranch" id="EditselectBranch" required aria-label="Disabled select example">
+                            {% for i in key %}
+                            <option value="{{i.id}}">{{i.branch}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Employee Names</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" name="selectEmp_name" id="EditselectEmp_name" required aria-label="Disabled select example">
+                            <option selected disabled="true">select employee name</option>
+                          </select>
+                        </div>
+                      </div>
+
+                    <div class="row mb-3">
+                        <label for="validationServer01" class="col-sm-2">Full Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-check-label form-control" name='txtFullname'
+                                id="txtFullname1">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Gender</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="radioGender" value="Male"
+                                    id="radioGenderMale" required>
+                                <label class="form-check-label" for="colFormLabelSm">Male</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="radioGender" value="Female"
+                                    id="radioGenderFemale" required>
+                                <label class="form-check-label" for="colFormLabelSm">Female</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="radioGender" value="Others"
+                                    id="radioGenderOthers" required>
+                                <label class="form-check-label" for="colFormLabelSm">Others</label>
+                                <div class="invalid-feedback">Select anyone of the above</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Blood
+                            Group</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="selectBlood_group" id='selectBlood_group1' required
+                                aria-label="select example">
+                                <option selected disabled="true">Open this select menu</option>
+                                <option value="A-positive (A+)">A-positive (A+)</option>
+                                <option value="A-negative (A-)">A-negative (A-)</option>
+                                <option value="B-positive (B+)">B-positive (B+)</option>
+                                <option value="B-negative (B-)">B-negative (B-)</option>
+                                <option value="AB-positive (AB+)">AB-positive (AB+)</option>
+                                <option value="AB-negative (AB-)">AB-negative (AB-)</option>
+                                <option value="O-positive (O+)">O-positive (O+)</option>
+                                <option value="O-negative (O-)">O-negative (O-)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">DOB</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control form-control-sm" name="dateDOB" id="dateDOB1"
+                                placeholder="Select Date of Birth">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm"
+                            class="col-sm-2 col-form-label col-form-label-sm">Designation</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm" name="txtDesignation"
+                                id="txtDesignation1" placeholder="Enter Designation">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Contact
+                            Number</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm" name="txtContact_number"
+                                id="txtContact_number1" placeholder="Enter Contact Number">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Photo</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control form-control-sm" name="filePhoto" id="filePhoto"
+                                placeholder="Upload your photo">
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="branch_id" id="branch_id12">
+                    <input type="hidden" name="employee_id" id="employee_id12">
+                    <input type="hidden" name="details_id" id="details_id12">
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+
+
+<div class="modal fade" id="ModalBranchCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form name="myForm" method="POST" action="/get_branch/">
+          {% csrf_token %}
+          <h3>Select or enter branch</h3>
+          <div class="row mb-3">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Branch</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" name="txtBranch" id="txtBranch"
+                placeholder="Enter Branch name">
+            </div>
+          </div>
+  
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Create Branch</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

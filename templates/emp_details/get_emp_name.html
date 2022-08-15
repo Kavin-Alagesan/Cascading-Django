@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Message block -->
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-info" role="alert">
+  {{ message }}</div>
+{% endfor %}
+{% endif %}
+<!-- End message block -->
+
+<div class="container">
+  <form name="myForm" method="POST" action="{% url 'get_emp_name' %}">
+    {% csrf_token %}
+    <h3>Add Employee</h3>
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Select Branch</label>
+      <div class="col-sm-10">
+        <select class="form-select" name="selectBranch" id="selectBranch1" aria-label="Disabled select example">
+          {% for i in response %}
+          <option value="{{i.id}}">{{i.branch}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Employee Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" name="txtEmp_name" id="txtEmp_name1"
+          placeholder="Enter employee name">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Employee ID</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" name="txtEmp_id" id="txtEmp_id"
+          placeholder="Enter employee id">
+      </div>
+    </div>
+
+
+
+    <div class="row mb-3">
+      <div style="text-align:center">
+        <button class="btn btn-primary" type="submit">Create Employee</button>
+        <p></p>
+      </div>
+      <div style="text-align:right">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalBranchCreate">
+          Create New Branch
+        </button>
+        <p></p>
+        <a href="{% url 'list_details' %}" class="btn btn-info">List Details</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% include 'emp_details/get_branch.html' %}
+
+
+{% endblock %}
+
+<script>
+  $(document).ready(function () {
+    $ajax({
+      url: 'http://127.0.0.1:8000/api/employee/',
+      dataType: 'json',
+      success: function (data) {
+        for (var i = 0; i < data.length; i++) {
+          var rows = $('<option>' + data[i].branch + '</option>')
+          $('#selectBranch1').append(rows);
+        }
+      }
+    });
+  });
+</script>

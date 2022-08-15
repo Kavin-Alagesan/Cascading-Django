@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <form name="myForm" method="POST" action="/get_emp_details/" enctype="multipart/form-data" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <h3>Add Employee Details</h3>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Branches</label>
+      <div class="col-sm-10">
+        <select class="form-select" name="selectBranch" id="selectBranch1" aria-label="Disabled select example">
+          {% for i in response %}
+          <option value="{{i.id}}">{{i.branch}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Employee Names</label>
+      <div class="col-sm-10">
+        <select class="form-select" name="selectEmp_name" id="selectEmp_name1" aria-label="Disabled select example">
+          <option selected disabled="true">select employee name</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Employee Fullname</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" name="txtFullname" id="txtFullname"
+          placeholder="Enter Employee Fullname">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Gender</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="radioGender" value="Male" id="radioGender" required>
+          <label class="form-check-label" for="colFormLabelSm">Male</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="radioGender" value="Female" id="radioGender" required>
+          <label class="form-check-label" for="colFormLabelSm">Female</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="radioGender" value="Others" id="radioGender" required>
+          <label class="form-check-label" for="colFormLabelSm">Others</label>
+          <div class="invalid-feedback">Select anyone of the above</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Blood Group</label>
+      <div class="col-sm-10">
+        <select class="form-select" name="selectBlood_group" required aria-label="select example">
+          <option selected disabled="true">Open this select menu</option>
+          <option value="A-positive (A+)">A-positive (A+)</option>
+          <option value="A-negative (A-)">A-negative (A-)</option>
+          <option value="B-positive (B+)">B-positive (B+)</option>
+          <option value="B-negative (B-)">B-negative (B-)</option>
+          <option value="AB-positive (AB+)">AB-positive (AB+)</option>
+          <option value="AB-negative (AB-)">AB-negative (AB-)</option>
+          <option value="O-positive (O+)">O-positive (O+)</option>
+          <option value="O-negative (O-)">O-negative (O-)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">DOB</label>
+      <div class="col-sm-10">
+        <input type="date" class="form-control form-control-sm" name="dateDOB" id="dateDOB"
+          placeholder="Select Date of Birth">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Designation</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" name="txtDesignation" id="txtDesignation"
+          placeholder="Enter Designation">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Contact Number</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control form-control-sm" name="txtContact_number" id="txtContact_number"
+          placeholder="Enter Contact Number">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Photo</label>
+      <div class="col-sm-10">
+        <input type="file" class="form-control form-control-sm" name="filePhoto" id="filePhoto"
+          placeholder="Upload your photo">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div style="text-align:center">
+        <button class="btn btn-primary" type="submit" id="get_emp_details1">Submit Details</button>
+        <a href="{% url 'list_details' %}" class="btn btn-outline-dark">List Details</a>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+{% endblock %}

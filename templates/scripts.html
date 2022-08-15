@@ -1,0 +1,103 @@
+{% load static %}
+
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+<!-- Jquerry -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- bind branch and employee at final -->
+<script>
+  $('#selectBranch1').change(function () {
+    var id = $('#selectBranch1').val();
+    alert(id)
+    console.log(id);
+    $('#selectEmp_name1').empty();
+    $.ajax({
+      url: 'http://127.0.0.1:8000/api/employee/' + id,
+      method: 'GET',
+      data: '',
+      datatype: 'json'
+    })
+      .done(function (data) {
+        console.log(data)
+        $('#selectEmp_name1').append("<option value='0'>select employee name</option>")
+        $.each(data, function (index, value) {
+          console.log(`${index}, ${value.branch}, ${value.emp_name}, ${value.id}`)
+          $('#selectEmp_name1').append(`<option value=${value.id}>${value.emp_name}</option>`)
+        })
+      })
+  })
+
+</script>
+
+
+<!-- Modal Update data bind -->
+
+<script>
+  function edit(ID) {
+    alert(ID)
+    $.ajax({
+      url: 'http://127.0.0.1:8000/api/nested_emp_details/' + ID + '/',
+      method: 'GET',
+      data: '',
+      dataType: 'json',
+    }).done(function (data) {
+      $('#EditselectBranch').change(function () {
+        var id = $('#EditselectBranch').val();
+        alert(id)
+        console.log(id);
+        $('#EditselectEmp_name').empty();
+        $.ajax({
+          url: 'http://127.0.0.1:8000/api/employee/' + id,
+          method: 'GET',
+          data: '',
+          datatype: 'json'
+        })
+          .done(function (data) {
+            console.log(data)
+            $('#EditselectEmp_name').append("<option value='0'>select employee name</option>")
+            $.each(data, function (index, value) {
+              $('#EditselectEmp_name').append(`<option value=${value.emp_name}>${value.emp_name}</option>`)
+            })
+          })
+      })
+      $('#txtFullname1').val(data.emp_fullname)
+      $('#radioGender1').val(data.gender)
+      if (data.gender == 'Male') {
+        $('#radioGenderMale').prop('checked', true)
+      }
+      else if (data.gender == 'Female') {
+        $('#radioGenderFemale').prop('checked', true)
+      }
+      else if (data.gender == 'Others') {
+        $('#radioGenderOthers').prop('checked', true)
+      }
+      $('#selectBlood_group1').val(data.blood_group)
+      $('#dateDOB1').val(data.dob)
+      $('#txtDesignation1').val(data.designation)
+      $('#txtContact_number1').val(data.contact_number)
+
+      console.log(data.emp_name.branch.id)
+      console.log(data.emp_name.id)
+      
+      $('#branch_id12').val(data.emp_name.branch.id)
+      $('#employee_id12').val(data.emp_name.id)
+      $('#details_id12').val(data.id)
+
+      console.log(data);
+      $('#bind7').attr('action', '/update/' + ID + '/');
+    });
+  }
+</script>
+
